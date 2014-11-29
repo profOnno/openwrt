@@ -100,6 +100,9 @@ define Build/Configure
 		--enable-http \
 		--enable-ssl \
 		--enable-proxy \
+		--enable-so \
+		--enable-rewrite=shared \
+		--enable-substitute=shared \
 		--disable-disk-cache \
 		--enable-maintainer-mode \
 		--enable-mime-magic \
@@ -144,6 +147,7 @@ define Package/apache/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{ab,apachectl,checkgid,dbmmanage,envvars,envvars-std,htcacheclean,htdbm,htdigest,htpasswd,httpd,httxt2dbm,logresolve,rotatelogs} $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/httpd.exp $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/*.so $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/share
 	$(CP) $(PKG_INSTALL_DIR)/usr/share/{error,htdocs,cgi-bin,build} $(1)/usr/share/
 	$(INSTALL_DIR) $(1)/etc/apache
