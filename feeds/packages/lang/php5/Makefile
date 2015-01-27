@@ -24,6 +24,7 @@ PKG_FIXUP:=libtool no-autoreconf
 PKG_BUILD_PARALLEL:=1
 
 PHP5_MODULES = \
+	bz2 \
 	calendar ctype curl \
 	fileinfo \
 	dom \
@@ -31,7 +32,7 @@ PHP5_MODULES = \
 	ftp \
 	gettext gd gmp \
 	hash \
-	iconv \
+	iconv intl \
 	json \
 	ldap \
 	mbstring mcrypt mysql mysqli \
@@ -39,7 +40,7 @@ PHP5_MODULES = \
 	pcntl pdo pdo-mysql pdo-pgsql pdo-sqlite pgsql \
 	session shmop simplexml soap sockets sqlite sqlite3 sysvmsg sysvsem sysvshm \
 	tokenizer \
-	xml xmlreader xmlwriter zip \
+	xml xmlreader xmlrpc xmlwriter zip \
 
 PKG_CONFIG_DEPENDS:= \
 	$(patsubst %,CONFIG_PACKAGE_php5-mod-%,$(PHP5_MODULES)) \
@@ -99,6 +100,8 @@ endef
 define Package/php5-cli
   $(call Package/php5/Default)
   TITLE+= (CLI)
+  DEPENDS:=+libstdcpp +libpcre +zlib \
+           +PHP5_LIBXML:libxml2
 endef
 
 define Package/php5-cli/description
@@ -109,6 +112,8 @@ endef
 define Package/php5-cgi
   $(call Package/php5/Default)
   TITLE+= (CGI & FastCGI)
+  DEPENDS:=+libstdcpp +libpcre +zlib \
+           +PHP5_LIBXML:libxml2
 endef
 
 define Package/php5-cgi/description
@@ -144,6 +149,12 @@ CONFIGURE_ARGS+= \
 	  --with-zlib-dir="$(STAGING_DIR)/usr" \
 	--with-pcre-regex="$(STAGING_DIR)/usr" \
 	--disable-phar
+
+ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-bz2),)
+  CONFIGURE_ARGS+= --with-bz2=shared,"$(STAGING_DIR)/usr"
+else
+  CONFIGURE_ARGS+= --without-bz2
+endif
 
 ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-calendar),)
   CONFIGURE_ARGS+= --enable-calendar=shared
@@ -223,6 +234,12 @@ ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-iconv),)
   CONFIGURE_ARGS+= --with-iconv=shared,"$(ICONV_PREFIX)"
 else
   CONFIGURE_ARGS+= --without-iconv
+endif
+
+ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-intl),)
+  CONFIGURE_ARGS+= --enable-intl=shared
+else
+  CONFIGURE_ARGS+= --disable-intl
 endif
 
 ifneq ($(CONFIG_PACKAGE_php5-mod-json),)
@@ -388,6 +405,12 @@ else
   CONFIGURE_ARGS+= --disable-xmlreader
 endif
 
+ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-xmlrpc),)
+  CONFIGURE_ARGS+= --with-xmlrpc=shared
+else
+  CONFIGURE_ARGS+= --without-xmlrpc
+endif
+
 ifneq ($(SDK)$(CONFIG_PACKAGE_php5-mod-xmlwriter),)
   CONFIGURE_ARGS+= --enable-xmlwriter=shared,"$(STAGING_DIR)/usr"
 else
@@ -497,6 +520,7 @@ $(eval $(call BuildPackage,php5-cgi))
 $(eval $(call BuildPackage,php5-fastcgi))
 
 #$(eval $(call BuildModule,NAME,TITLE[,PKG DEPENDS]))
+$(eval $(call BuildModule,bz2,Bzip 2,+PACKAGE_php5-mod-bz2:bzip2 +PACKAGE_php5-mod-bz2:libbz2))
 $(eval $(call BuildModule,calendar,Calendar))
 $(eval $(call BuildModule,ctype,Ctype))
 $(eval $(call BuildModule,curl,cURL,+PACKAGE_php5-mod-curl:libcurl))
@@ -509,6 +533,7 @@ $(eval $(call BuildModule,gd,GD graphics,+PACKAGE_php5-mod-gd:libjpeg +PACKAGE_p
 $(eval $(call BuildModule,gmp,GMP,+PACKAGE_php5-mod-gmp:libgmp))
 $(eval $(call BuildModule,hash,Hash))
 $(eval $(call BuildModule,iconv,iConv,+PACKAGE_php5-mod-iconv:libiconv))
+$(eval $(call BuildModule,intl,Internationalization,+PACKAGE_php5-mod-intl:libicu))
 $(eval $(call BuildModule,json,JSON))
 $(eval $(call BuildModule,ldap,LDAP,+PACKAGE_php5-mod-ldap:libopenldap +PACKAGE_php5-mod-ldap:libsasl2))
 $(eval $(call BuildModule,mbstring,MBString))
@@ -534,5 +559,6 @@ $(eval $(call BuildModule,sysvshm,System V semaphore))
 $(eval $(call BuildModule,tokenizer,Tokenizer))
 $(eval $(call BuildModule,xml,XML,+PHP5_LIBXML:libxml2 +!PHP5_LIBXML:libexpat))
 $(eval $(call BuildModule,xmlreader,XMLReader,+@PHP5_LIBXML +PACKAGE_php5-mod-xmlreader:libxml2 +PACKAGE_php5-mod-xmlreader:libiconv))
+$(eval $(call BuildModule,xmlrpc,XML RPC,+PACKAGE_php5-mod-xmlrpc:libxmlrpc))
 $(eval $(call BuildModule,xmlwriter,XMLWriter,+@PHP5_LIBXML +PACKAGE_php5-mod-xmlwriter:libxml2 +PACKAGE_php5-mod-xmlwriter:libiconv))
 $(eval $(call BuildModule,zip,ZIP,+PACKAGE_php5-mod-zip:zlib))
