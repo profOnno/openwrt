@@ -145,36 +145,6 @@ endif
 define Build/Configure
 endef
 
-# conch lore mail names news runner web words
-
-application/  
-conch/	      
-copyright.py  
-cred/	      
-enterprise/
-__init__.py
-internet/
-lore/
-mail/
-manhole/
-names/
-news/
-pair/
-persisted/
-plugin.py
-plugins/
-protocols/
-python/
-runner/
-scripts/
-spread/
-tap/
-test/
-trial/
-_version.py
-web/
-words/
-
 define PyPackage/twisted/filespec
 +|/usr/bin/mktap
 +|/usr/bin/twistd
@@ -185,6 +155,7 @@ define PyPackage/twisted/filespec
 +|$(PYTHON_PKG_DIR)/twisted/__init__.py
 +|$(PYTHON_PKG_DIR)/twisted/internet
 +|$(PYTHON_PKG_DIR)/twisted/manhole
++|$(PYTHON_PKG_DIR)/twisted/pair
 +|$(PYTHON_PKG_DIR)/twisted/persisted
 +|$(PYTHON_PKG_DIR)/twisted/plugin.py
 +|$(PYTHON_PKG_DIR)/twisted/protocols
@@ -192,13 +163,15 @@ define PyPackage/twisted/filespec
 +|$(PYTHON_PKG_DIR)/twisted/scripts
 +|$(PYTHON_PKG_DIR)/twisted/spread
 +|$(PYTHON_PKG_DIR)/twisted/tap
+-|$(PYTHON_PKG_DIR)/twisted/test
 +|$(PYTHON_PKG_DIR)/twisted/trial
 -|$(PYTHON_PKG_DIR)/twisted/trial/test
 +|$(PYTHON_PKG_DIR)/twisted/_version.py
-+|$(PYTHON_PKG_DIR)/twisted/plugins/dropin.cache
 +|$(PYTHON_PKG_DIR)/twisted/plugins/__init__.py
-+|$(PYTHON_PKG_DIR)/twisted/plugins/notestplugin.py
-+|$(PYTHON_PKG_DIR)/twisted/plugins/testplugin.py
++|$(PYTHON_PKG_DIR)/twisted/plugins/cred_anonymous.py
++|$(PYTHON_PKG_DIR)/twisted/plugins/cred_file.py
++|$(PYTHON_PKG_DIR)/twisted/plugins/cred_memory.py
++|$(PYTHON_PKG_DIR)/twisted/plugins/cred_unix.py
 +|$(PYTHON_PKG_DIR)/twisted/plugins/twisted_ftp.py
 +|$(PYTHON_PKG_DIR)/twisted/plugins/twisted_inet.py
 +|$(PYTHON_PKG_DIR)/twisted/plugins/twisted_manhole.py
