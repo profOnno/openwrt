@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=php
-PKG_VERSION:=5.4.35
+PKG_VERSION:=5.5.21
 PKG_RELEASE:=1
 
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
@@ -18,7 +18,7 @@ PKG_LICENSE_FILE=LICENSE
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=http://www.php.net/distributions/
-PKG_MD5SUM:=489cc8336488fb2e722ffa3c08f9c864
+PKG_MD5SUM:=8fe631ac52a3df9d6429faad81cf2562
 
 PKG_FIXUP:=libtool no-autoreconf
 PKG_BUILD_PARALLEL:=1
@@ -532,7 +532,7 @@ $(eval $(call BuildModule,gettext,Gettext,+PACKAGE_php5-mod-gettext:libintl-full
 $(eval $(call BuildModule,gd,GD graphics,+PACKAGE_php5-mod-gd:libjpeg +PACKAGE_php5-mod-gd:libpng))
 $(eval $(call BuildModule,gmp,GMP,+PACKAGE_php5-mod-gmp:libgmp))
 $(eval $(call BuildModule,hash,Hash))
-$(eval $(call BuildModule,iconv,iConv,+PACKAGE_php5-mod-iconv:libiconv))
+$(eval $(call BuildModule,iconv,iConv,+PACKAGE_php5-mod-iconv:libiconv-full))
 $(eval $(call BuildModule,intl,Internationalization,+PACKAGE_php5-mod-intl:libicu))
 $(eval $(call BuildModule,json,JSON))
 $(eval $(call BuildModule,ldap,LDAP,+PACKAGE_php5-mod-ldap:libopenldap +PACKAGE_php5-mod-ldap:libsasl2))
@@ -559,6 +559,6 @@ $(eval $(call BuildModule,sysvshm,System V semaphore))
 $(eval $(call BuildModule,tokenizer,Tokenizer))
 $(eval $(call BuildModule,xml,XML,+PHP5_LIBXML:libxml2 +!PHP5_LIBXML:libexpat))
 $(eval $(call BuildModule,xmlreader,XMLReader,+@PHP5_LIBXML +PACKAGE_php5-mod-xmlreader:libxml2 +PACKAGE_php5-mod-xmlreader:libiconv))
-$(eval $(call BuildModule,xmlrpc,XML RPC,+PACKAGE_php5-mod-xmlrpc:libxmlrpc))
+# $(eval $(call BuildModule,xmlrpc,XML RPC,+PACKAGE_php5-mod-xmlrpc:libxmlrpc +libiconv +PACKAGE_php5-mod-xmlrpc:libiconv))
 $(eval $(call BuildModule,xmlwriter,XMLWriter,+@PHP5_LIBXML +PACKAGE_php5-mod-xmlwriter:libxml2 +PACKAGE_php5-mod-xmlwriter:libiconv))
 $(eval $(call BuildModule,zip,ZIP,+PACKAGE_php5-mod-zip:zlib))
