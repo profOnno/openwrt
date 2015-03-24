@@ -144,7 +144,7 @@ CONFIG_ALL=y
 #
 CONFIG_DISPLAY_SUPPORT=y
 CONFIG_BUILD_PATENTED=y
-# CONFIG_BUILD_NLS is not set
+CONFIG_BUILD_NLS=y
 # CONFIG_BUILD_STATIC_TOOLS is not set
 CONFIG_SHADOW_PASSWORDS=y
 # CONFIG_CLEAN_IPKG is not set
@@ -160,11 +160,13 @@ CONFIG_KERNEL_DEBUG_FS=y
 # CONFIG_KERNEL_PERF_EVENTS is not set
 # CONFIG_KERNEL_PROFILING is not set
 CONFIG_KERNEL_KALLSYMS=y
-# CONFIG_KERNEL_FTRACE is not set
+CONFIG_KERNEL_FTRACE=y
+CONFIG_KERNEL_FTRACE_SYSCALLS=y
+CONFIG_KERNEL_ENABLE_DEFAULT_TRACERS=y
 CONFIG_KERNEL_DEBUG_KERNEL=y
 CONFIG_KERNEL_DEBUG_INFO=y
 # CONFIG_KERNEL_DYNAMIC_DEBUG is not set
-# CONFIG_KERNEL_AIO is not set
+CONFIG_KERNEL_AIO=y
 # CONFIG_KERNEL_DIRECT_IO is not set
 CONFIG_KERNEL_MAGIC_SYSRQ=y
 CONFIG_KERNEL_COREDUMP=y
@@ -1179,7 +1181,7 @@ CONFIG_PACKAGE_libgcc=y
 CONFIG_PACKAGE_libpthread=y
 CONFIG_PACKAGE_librt=y
 CONFIG_PACKAGE_libstdcpp=m
-# CONFIG_PACKAGE_libthread-db is not set
+CONFIG_PACKAGE_libthread-db=m
 # CONFIG_PACKAGE_mksh is not set
 # CONFIG_PACKAGE_mtd is not set
 CONFIG_PACKAGE_netifd=y
@@ -1235,16 +1237,22 @@ CONFIG_PACKAGE_uci=y
 #
 # Development
 #
-# CONFIG_PACKAGE_binutils is not set
-# CONFIG_PACKAGE_diffutils is not set
-# CONFIG_PACKAGE_gcc is not set
-# CONFIG_PACKAGE_gdb is not set
-# CONFIG_PACKAGE_gdbserver is not set
-# CONFIG_PACKAGE_objdump is not set
-# CONFIG_PACKAGE_patch is not set
-# CONFIG_PACKAGE_trace-cmd is not set
-# CONFIG_PACKAGE_trace-cmd-extra is not set
-# CONFIG_PACKAGE_valgrind is not set
+CONFIG_PACKAGE_binutils=m
+CONFIG_PACKAGE_diffutils=m
+CONFIG_PACKAGE_gcc=m
+CONFIG_PACKAGE_gdb=m
+CONFIG_PACKAGE_gdbserver=m
+CONFIG_PACKAGE_objdump=m
+CONFIG_PACKAGE_patch=m
+CONFIG_PACKAGE_trace-cmd=m
+CONFIG_PACKAGE_trace-cmd-extra=m
+CONFIG_PACKAGE_valgrind=m
+CONFIG_PACKAGE_valgrind-cachegrind=m
+CONFIG_PACKAGE_valgrind-callgrind=m
+CONFIG_PACKAGE_valgrind-drd=m
+CONFIG_PACKAGE_valgrind-helgrind=m
+CONFIG_PACKAGE_valgrind-massif=m
+CONFIG_PACKAGE_valgrind-vgdb=m
 
 #
 # Firmware
@@ -1817,6 +1825,7 @@ CONFIG_PHP5_SYSTEMTZDATA=y
 CONFIG_PACKAGE_php5-cgi=m
 CONFIG_PACKAGE_php5-cli=m
 CONFIG_PACKAGE_php5-fastcgi=m
+CONFIG_PACKAGE_php5-mod-bz2=m
 CONFIG_PACKAGE_php5-mod-calendar=m
 CONFIG_PACKAGE_php5-mod-ctype=m
 CONFIG_PACKAGE_php5-mod-curl=m
@@ -1829,6 +1838,7 @@ CONFIG_PACKAGE_php5-mod-gettext=m
 CONFIG_PACKAGE_php5-mod-gmp=m
 CONFIG_PACKAGE_php5-mod-hash=m
 CONFIG_PACKAGE_php5-mod-iconv=m
+CONFIG_PACKAGE_php5-mod-intl=m
 CONFIG_PACKAGE_php5-mod-json=m
 CONFIG_PACKAGE_php5-mod-ldap=m
 CONFIG_PACKAGE_php5-mod-mbstring=m
@@ -2002,6 +2012,16 @@ CONFIG_PACKAGE_python-dns=m
 # CONFIG_PACKAGE_python-pip is not set
 # CONFIG_PACKAGE_python-setuptools is not set
 # CONFIG_PACKAGE_python3 is not set
+CONFIG_PACKAGE_twisted=m
+CONFIG_PACKAGE_twisted-conch=m
+CONFIG_PACKAGE_twisted-lore=m
+CONFIG_PACKAGE_twisted-mail=m
+CONFIG_PACKAGE_twisted-names=m
+CONFIG_PACKAGE_twisted-news=m
+CONFIG_PACKAGE_twisted-runner=m
+CONFIG_PACKAGE_twisted-web=m
+CONFIG_PACKAGE_twisted-words=m
+CONFIG_PACKAGE_zope-interface=m
 
 #
 # Ruby
@@ -2060,6 +2080,7 @@ CONFIG_PACKAGE_ruby-webrick=m
 CONFIG_PACKAGE_ruby-xmlrpc=m
 CONFIG_PACKAGE_ruby-yaml=m
 CONFIG_PACKAGE_ruby-zlib=m
+CONFIG_PACKAGE_node=m
 
 #
 # Libraries
@@ -2127,7 +2148,7 @@ CONFIG_PACKAGE_libsqlite3=m
 CONFIG_PACKAGE_unixodbc=m
 CONFIG_PACKAGE_alsa-lib=m
 # CONFIG_PACKAGE_argp-standalone is not set
-# CONFIG_PACKAGE_bind-libs is not set
+CONFIG_PACKAGE_bind-libs=m
 # CONFIG_PACKAGE_ccid is not set
 # CONFIG_PACKAGE_confuse is not set
 # CONFIG_PACKAGE_dtndht is not set
@@ -2202,14 +2223,8 @@ CONFIG_PACKAGE_libevent=m
 CONFIG_PACKAGE_libexif=m
 CONFIG_PACKAGE_libexpat=m
 # CONFIG_PACKAGE_libexslt is not set
-CONFIG_PACKAGE_libfaad2=m
-# CONFIG_FAAD2_ALWAYS_USE_FLOATING_POINT is not set
 CONFIG_PACKAGE_libffi=m
-CONFIG_PACKAGE_libffmpeg-full=m
-# CONFIG_PACKAGE_libffmpeg-mini is not set
-CONFIG_PACKAGE_libflac=m
 # CONFIG_PACKAGE_libfreecwmp is not set
-# CONFIG_PACKAGE_libfreetype is not set
 # CONFIG_PACKAGE_libftdi is not set
 # CONFIG_PACKAGE_libftdi1 is not set
 # CONFIG_PACKAGE_libgcrypt is not set
@@ -2220,8 +2235,15 @@ CONFIG_PACKAGE_libgmp=m
 # CONFIG_PACKAGE_libhamlib is not set
 # CONFIG_PACKAGE_ibrcommon is not set
 # CONFIG_PACKAGE_ibrdtn is not set
+CONFIG_PACKAGE_libfaad2=m
+# CONFIG_FAAD2_ALWAYS_USE_FLOATING_POINT is not set
+CONFIG_PACKAGE_libffmpeg-full=m
+# CONFIG_PACKAGE_libffmpeg-mini is not set
+CONFIG_PACKAGE_libflac=m
+# CONFIG_PACKAGE_libfreetype is not set
 CONFIG_PACKAGE_libiconv=m
 CONFIG_PACKAGE_libiconv-full=m
+CONFIG_PACKAGE_libicu=m
 CONFIG_PACKAGE_libid3tag=m
 CONFIG_PACKAGE_libidn=m
 # CONFIG_PACKAGE_libimobiledevice is not set
@@ -2237,6 +2259,8 @@ CONFIG_PACKAGE_liblua=m
 # CONFIG_PACKAGE_liblzo is not set
 CONFIG_PACKAGE_libmad=m
 CONFIG_PACKAGE_libmagic=m
+CONFIG_PACKAGE_libmariadbclient=m
+CONFIG_PACKAGE_libmariadbclient-r=m
 CONFIG_PACKAGE_libmcrypt=m
 # CONFIG_PACKAGE_libmicroxml is not set
 # CONFIG_PACKAGE_libminiupnpc is not set
@@ -2705,9 +2729,9 @@ CONFIG_PACKAGE_freeradius2-mod-sqllog=m
 # CONFIG_PACKAGE_avahi-utils is not set
 # CONFIG_PACKAGE_bind-check is not set
 # CONFIG_PACKAGE_bind-client is not set
-# CONFIG_PACKAGE_bind-dig is not set
+CONFIG_PACKAGE_bind-dig=m
 # CONFIG_PACKAGE_bind-dnssec is not set
-# CONFIG_PACKAGE_bind-host is not set
+CONFIG_PACKAGE_bind-host=m
 # CONFIG_PACKAGE_bind-rndc is not set
 # CONFIG_PACKAGE_bind-server is not set
 # CONFIG_PACKAGE_bind-tools is not set
@@ -3208,7 +3232,7 @@ CONFIG_PACKAGE_SAMBA_MAX_DEBUG_LEVEL=-1
 # CONFIG_PACKAGE_soloscli is not set
 # CONFIG_PACKAGE_sstp-client is not set
 # CONFIG_PACKAGE_tayga is not set
-# CONFIG_PACKAGE_tcpdump is not set
+CONFIG_PACKAGE_tcpdump=m
 # CONFIG_PACKAGE_tcpdump-mini is not set
 # CONFIG_PACKAGE_tgt is not set
 # CONFIG_PACKAGE_tor is not set
@@ -3326,6 +3350,7 @@ CONFIG_PACKAGE_acl=m
 #
 # database
 #
+CONFIG_PACKAGE_mariadb-server=m
 CONFIG_PACKAGE_mysql-server=m
 CONFIG_PACKAGE_pgsql-cli=m
 CONFIG_PACKAGE_pgsql-server=m
@@ -3470,7 +3495,7 @@ CONFIG_PACKAGE_shadow-utils=m
 # CONFIG_PACKAGE_smartmontools is not set
 # CONFIG_PACKAGE_spidev-test is not set
 # CONFIG_PACKAGE_stm32flash is not set
-# CONFIG_PACKAGE_strace is not set
+CONFIG_PACKAGE_strace=m
 # CONFIG_PACKAGE_tcsh is not set
 CONFIG_PACKAGE_tiff-utils=m
 # CONFIG_PACKAGE_tmux is not set
