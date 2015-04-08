@@ -30,8 +30,9 @@ use `./scripts/feeds update` without the `-i` option: only indexing of
 the feeds is allowed.
 
 The current configuration for the build is kept in
-m-creations/config-x86_64.
-
+mq
+-creations/config-x86_64.
+:
 * Build Process
 
 The build process uses the mentioned m-creations/config-x86_64 as
@@ -95,6 +96,8 @@ git subtree push --prefix=feeds/packages my-feed-packages 20141126-update-freera
 mkdir feeds/packages/lang/twisted/
 
 # ... create a Makefile and optionally patches
+
+./scripts/feeds update -i
 
 ./scripts/feeds install twisted
 
