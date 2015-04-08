@@ -26,6 +26,7 @@ PKG_USE_MIPS16:=0
 PKG_FIXUP:=libtool
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/cmake.mk
 
 define Package/libmariadbclient/Default
   SECTION:=libs
@@ -38,7 +39,7 @@ endef
 define Package/mariadb-server
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libmariadbclient +libpthread +libncursesw +libreadline
+  DEPENDS:=+libmariadbclient +libpthread +libncursesw +libreadline +libevent
   TITLE:=MariaDB Server
   URL:=http://mariadb.com/
   SUBMENU:=database
@@ -58,37 +59,35 @@ TARGET_CXX=g++-uc
 
 TARGET_CFLAGS += $(FPIC)
 
-CONFIGURE_ARGS += \
-	--enable-shared \
-	--enable-static \
-	--enable-thread-safe-client \
-	--disable-assembler \
-	--with-pthread \
-	--with-server \
-	--without-mariadbmanager \
-	--with-mariadbd-user=root \
-	--with-unix-socket-path=/tmp \
-	--without-libwrap \
-	--with-low-memory \
-	--without-embedded-server \
-	--without-query-cache \
-	--without-ssl \
-	--without-docs \
-	--without-man \
-	--without-readline \
-	--without-debug \
-	--with-named-thread-libs=-lpthread
+CMAKE_OPTIONS += -DSTACK_DIRECTION=-1 -DXTRADB_OK=1 -DWITHOUT_XTRADB=1 -DHAVE_BACKTRACE_WITHOUT_EXECINFO=1 -DWITH_UNIT_TESTS=0 -DHAVE_CXX_-Wmissing-prototypes=0 -DHAVE_CXX_-Wstrict-prototypes=1 -DHAVE_STDCXX11=1 -DHAVE_STDCXX0X=1 -DHAVE_CXX_-Wcast-align=1 -DHAVE_CXX_-Wshadow=1 -DHAVE_CXX_-Wpointer-arith=1 -DHAVE_CXX_-Wmissing-declarations=1 -DHAVE_CXX_-Wbad-function-cast=1 -DHAVE_CXX_-Wno-missing-noreturn=0 -DHAVE_C_-fno-rtti=1 -DHAVE_C_-Wcast-align=1 -DHAVE_C_-Wshadow=1 -DHAVE_C_-Wpointer-arith=1 -DHAVE_C_-Wmissing-declarations=1 -DHAVE_C_-Wmissing-prototypes=1 -DHAVE_C_-Wstrict-prototypes=1 -DHAVE_C_-Wno-missing-noreturn=0 -DHAVE_C_-Wbad-function-cast=1 -DHAVE_C_-Wextra=1 -DHAVE_C_-Wno-error=strict-overflow
 
-CONFIGURE_VARS += \
-	mariadb_cv_compress=yes \
-	mariadb_cv_gethostname_style=glibc2 \
-	mariadb_cv_gcc_atomic_builtins=yes \
-	mariadb_cv_gcc_atomic_builtins_pthread_t=yes \
-	ac_cv_c_stack_direction=-1
+# CONFIGURE_ARGS += \
+# 	--enable-shared \
+# 	--enable-static \
+# 	--enable-thread-safe-client \
+# 	--disable-assembler \
+# 	--with-pthread \
+# 	--with-server \
+# 	--without-mariadbmanager \
+# 	--with-mariadbd-user=root \
+# 	--with-unix-socket-path=/tmp \
+# 	--without-libwrap \
+# 	--with-low-memory \
+# 	--without-embedded-server \
+# 	--without-query-cache \
+# 	--without-ssl \
+# 	--without-docs \
+# 	--without-man \
+# 	--without-readline \
+# 	--without-debug \
+# 	--with-named-thread-libs=-lpthread
 
-define Build/Configure
-	cmake -DPLUGIN_TOKUDB=OFF $(PKG_BUILD_DIR)/CMakeLists.txt
-endef
+# CONFIGURE_VARS += \
+# 	mariadb_cv_compress=yes \
+# 	mariadb_cv_gethostname_style=glibc2 \
+# 	mariadb_cv_gcc_atomic_builtins=yes \
+# 	mariadb_cv_gcc_atomic_builtins_pthread_t=yes \
+# 	ac_cv_c_stack_direction=-1
 
 define Build/Compile
 	+$(MAKE) $(PKG_JOBS) -C "$(PKG_BUILD_DIR)" \
