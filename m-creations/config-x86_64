@@ -2155,6 +2155,7 @@ CONFIG_PACKAGE_bind-libs=m
 # CONFIG_PACKAGE_engine_pkcs11 is not set
 # CONFIG_PACKAGE_fcgi is not set
 CONFIG_PACKAGE_glib2=m
+CONFIG_PACKAGE_jemalloc=m
 # CONFIG_PACKAGE_libaio is not set
 # CONFIG_PACKAGE_libantlr3c is not set
 # CONFIG_PACKAGE_libao is not set
@@ -2259,8 +2260,6 @@ CONFIG_PACKAGE_liblua=m
 # CONFIG_PACKAGE_liblzo is not set
 CONFIG_PACKAGE_libmad=m
 CONFIG_PACKAGE_libmagic=m
-CONFIG_PACKAGE_libmariadbclient=m
-CONFIG_PACKAGE_libmariadbclient-r=m
 CONFIG_PACKAGE_libmcrypt=m
 # CONFIG_PACKAGE_libmicroxml is not set
 # CONFIG_PACKAGE_libminiupnpc is not set
@@ -2273,7 +2272,9 @@ CONFIG_PACKAGE_libmosquitto=m
 CONFIG_PACKAGE_libmpdclient=m
 # CONFIG_PACKAGE_libmpeg2 is not set
 CONFIG_PACKAGE_libmysqlclient=m
+CONFIG_PACKAGE_libmysqlclient-galera=m
 CONFIG_PACKAGE_libmysqlclient-r=m
+CONFIG_PACKAGE_libmysqlclient-r-galera=m
 # CONFIG_PACKAGE_libnatpmp is not set
 CONFIG_PACKAGE_libncurses=y
 CONFIG_PACKAGE_libncursesw=m
@@ -3350,7 +3351,7 @@ CONFIG_PACKAGE_acl=m
 #
 # database
 #
-CONFIG_PACKAGE_mariadb-server=m
+CONFIG_PACKAGE_mysql-galera=m
 CONFIG_PACKAGE_mysql-server=m
 CONFIG_PACKAGE_pgsql-cli=m
 CONFIG_PACKAGE_pgsql-server=m
