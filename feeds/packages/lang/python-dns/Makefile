@@ -39,7 +39,7 @@ endef
 
 define Package/python-dns/install
 	$(INSTALL_DIR) $(1)$(PYTHON_PKG_DIR)
-	$(CP) $(PKG_BUILD_DIR)/dns/* \
+	$(CP) $(PKG_INSTALL_DIR)$(PYTHON_PKG_DIR)/dns/* \
 		$(1)$(PYTHON_PKG_DIR)
 endef
 
