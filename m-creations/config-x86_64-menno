@@ -232,8 +232,8 @@ CONFIG_TARGET_INIT_SUPPRESS_STDERR=y
 CONFIG_VERSIONOPT=y
 CONFIG_VERSION_DIST="OpenWrt"
 CONFIG_VERSION_NICK=""
-CONFIG_VERSION_NUMBER="v20141128"
-CONFIG_VERSION_REPO="https://github.com/m-creations/openwrt/releases/download/%v"
+CONFIG_VERSION_NUMBER="v20150606"
+CONFIG_VERSION_REPO="https://github.com/profOnno/openwrt/releases/download/%v"
 CONFIG_VERSION_MANUFACTURER=""
 CONFIG_VERSION_PRODUCT=""
 CONFIG_VERSION_HWREV=""
@@ -2616,7 +2616,7 @@ CONFIG_PACKAGE_umurmur-openssl=m
 #
 # NMAP Suite
 #
-# CONFIG_PACKAGE_ncat is not set
+CONFIG_PACKAGE_ncat=m
 # CONFIG_PACKAGE_ncat-ssl is not set
 # CONFIG_PACKAGE_ndiff is not set
 # CONFIG_PACKAGE_nmap is not set
@@ -3079,7 +3079,7 @@ CONFIG_PACKAGE_faad2=m
 CONFIG_PACKAGE_lame=m
 CONFIG_PACKAGE_lame-lib=m
 CONFIG_PACKAGE_moc=m
-# CONFIG_PACKAGE_mpc is not set
+CONFIG_PACKAGE_mpc=m
 CONFIG_PACKAGE_mpd-full=m
 # CONFIG_PACKAGE_mpd-mini is not set
 # CONFIG_PACKAGE_portaudio is not set
